@@ -7,6 +7,7 @@ namespace _01Logger.Appenders
     {
         public ILayout Layout { get; }
         public ReportLevel ReportLevel { get; set; }
+        public int Count { get; set; }
 
         public void Append(string dateTime, ReportLevel reportLevel, string message);
     }

@@ -1,4 +1,5 @@
 ﻿using _01Logger.Appenders;
+using _01Logger.Core;
 using _01Logger.Layouts;
 using _01Logger.Loggers;
 
@@ -8,18 +9,11 @@ namespace _01Logger
     {
         static void Main(string[] args)
         {
-            var simpleLayout = new SimpleLayout();
-            var consoleAppender = new ConsoleAppender(simpleLayout);
+            ICommandInterpreter commandInterpreter = new CommandInterpreter();
 
-            var file = new LogFile();
-            var fileAppender = new FileAppender(simpleLayout, file);
+            IEngine engine = new Engine(commandInterpreter);
 
-            var logger = new Logger(consoleAppender, fileAppender);
-
-
-            logger.Error("3/31/2015 5:33:07 PM", "ERROR parsing request");
-
-            System.Console.WriteLine(fileAppender.LogFile.Size);
+            engine.Run();
         }
     }
 }
