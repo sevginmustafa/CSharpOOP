@@ -15,13 +15,13 @@ namespace SimpleSnake.GameObjects
         public Snake(Wall wall, int leftX, int topY)
             : base(leftX, topY)
         {
-            this.wall = wall;
             snakeElements = new Queue<Point>();
+            this.wall = wall;
             foods = new Food[]
             {
-               new FoodAsterisk(this.wall),
-               new FoodDollar(this.wall),
-               new FoodHash(this.wall)
+                new FoodAsterisk(wall),
+                new FoodDollar(wall),
+                new FoodHash(wall)
             };
             CreateSnake();
             foods[foodIndex].SetRandomPosition(snakeElements);
@@ -31,20 +31,19 @@ namespace SimpleSnake.GameObjects
         {
             for (int i = 0; i < 6; i++)
             {
-                Point point = new Point(LeftX + i, TopY);
-                point.Draw(snakeSymbol);
-                snakeElements.Enqueue(point);
+                snakeElements.Enqueue(new Point(LeftX + i, TopY));
+                Draw(LeftX + i, TopY, snakeSymbol);
             }
         }
 
         public bool IsMoving(Point direction)
         {
-            Point currentSnakeHead = snakeElements.Last();
+            Point snakeCurrentHead = snakeElements.Last();
 
-            GetNextPoint(direction, currentSnakeHead);
+            GetNextPoint(direction, snakeCurrentHead);
 
             if (LeftX == 0 || TopY == 0 ||
-                LeftX == wall.LeftX || TopY == wall.TopY)
+               LeftX == wall.LeftX || TopY == wall.TopY)
             {
                 return false;
             }
@@ -54,16 +53,17 @@ namespace SimpleSnake.GameObjects
                 return false;
             }
 
-            Point newHead = new Point(LeftX, TopY);
-            newHead.Draw(snakeSymbol);
-            snakeElements.Enqueue(newHead);
+            Point snakeNewHead = new Point(LeftX, TopY);
 
-            if (foods[foodIndex].IsFoodPoint(newHead))
+            snakeElements.Enqueue(snakeNewHead);
+            snakeNewHead.Draw(snakeSymbol);
+
+            if (foods[foodIndex].IsFoodPoint(snakeNewHead))
             {
-                GetNextPoint(direction, newHead);
-                newHead = new Point(LeftX, TopY);
-                newHead.Draw(snakeSymbol);
-                snakeElements.Enqueue(newHead);
+                GetNextPoint(direction, snakeNewHead);
+                snakeNewHead = new Point(LeftX, TopY);
+                snakeElements.Enqueue(snakeNewHead);
+                snakeNewHead.Draw(snakeSymbol);
 
                 foodIndex = new Random().Next(0, 3);
                 foods[foodIndex].SetRandomPosition(snakeElements);
@@ -77,8 +77,8 @@ namespace SimpleSnake.GameObjects
 
         private void GetNextPoint(Point direction, Point snakeHead)
         {
-            LeftX = snakeHead.LeftX + direction.LeftX;
-            TopY = snakeHead.TopY + direction.TopY;
+            LeftX = direction.LeftX + snakeHead.LeftX;
+            TopY = direction.TopY + snakeHead.TopY;
         }
     }
 }

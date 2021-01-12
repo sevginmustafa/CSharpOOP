@@ -1,7 +1,6 @@
-﻿using SimpleSnake.Core;
-using SimpleSnake.GameObjects;
-using System.Collections.Generic;
+﻿using SimpleSnake.GameObjects;
 using SimpleSnake.Utilities;
+using SimpleSnake.Core;
 
 namespace SimpleSnake
 {
@@ -10,10 +9,13 @@ namespace SimpleSnake
         public static void Main()
         {
             ConsoleWindow.CustomizeConsole();
+
             Wall wall = new Wall(60, 20);
 
-            Snake snake = new Snake(wall,1,1);
-            Engine engine = new Engine(snake);
+            Snake snake = new Snake(wall, 1, 1);
+
+            Engine engine = new Engine(wall,snake);
+
             engine.Run();
         }
     }
