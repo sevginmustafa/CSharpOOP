@@ -1,2 +1,2 @@
 # CSharpOOP
-Here I'll add the solutions of all exercises from the course!
+C# OOP Course from October 2020 at SoftUni
