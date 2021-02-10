@@ -1,3 +1,3 @@
 # CSharpOOP
-C# OOP Course from Oct
+C# OOP Course from Oc
 
