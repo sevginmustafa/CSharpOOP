@@ -1,2 +1,2 @@
 # CSharpOOP
-C# OOP Course from Octo
+C# OOP Course from Oc
