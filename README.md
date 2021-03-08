@@ -1,2 +1,2 @@
 # CSharpOOP
-C# OOP Course from October 2020 at S
+C# OOP Course from October 2020 a
