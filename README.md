@@ -1,2 +1,2 @@
 # CSharpOOP
-C# OOP Co
+C# OO
